@@ -1,0 +1,70 @@
+@use '../abstracts/mixins' as mix;
+@use "../abstracts/variables" as var;
+@use 'sass:math';
+
+.appointmentsTableContainer{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    transform: translateY(-20%);
+    width: 80%;
+    padding: 20px;
+    background-color: var.$background-color-base;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    #appointmentsTable{
+        width: 100%;
+        border-collapse: collapse;
+
+        thead{
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        th, td{
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .editButton,
+        .deleteButton {
+            color: var.$text-color-primary;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-right: 5px;
+            transition: .3s;
+        }  
+        
+        .editButton{
+            background-color: orange;
+            &:hover{
+                background-color: rgb(201, 130, 0);
+            }
+        }
+
+        .deleteButton{
+            background-color: red;
+            &:hover{
+                background-color: rgb(184, 0, 0);
+            }
+        }
+    }
+
+    a{
+        color: var.$text-color-primary;
+        background-color: #007bff;
+        padding: 10px 12px;
+        border-radius: 5px;
+        position: absolute;
+        top: -60px;
+        text-decoration: none;
+        transition: .3s;
+        &:hover{
+            background-color: #0056b3;
+        }
+    }
+}
