@@ -4,7 +4,7 @@ $.ajax({
     dataType: 'json',
     success: function(response){
        const doctors = response.allDoctors
-       const select = $('#doctor')
+       const select = $('.doctorSelect')
 
        doctors.forEach(function(doctor){
             let option = document.createElement('option')
@@ -21,12 +21,29 @@ $.ajax({
     dataType: 'json',
     success: function(response){
         const services = response.allServices
-        const select = $('#service')
+        const select = $('.serviceSelect')
  
         services.forEach(function(service){
             let option = document.createElement('option')
             option.value = service.id
             option.text = service.service
+            select.append(option)
+        })
+    } 
+})
+
+$.ajax({
+    type: 'GET',
+    url: './php/getStatus.php',
+    dataType: 'json',
+    success: function(response){
+        const status = response.allStatus
+        const select = $('.statusSelect')
+ 
+        status.forEach(function(status){
+            let option = document.createElement('option')
+            option.value = status.id
+            option.text = status.status
             select.append(option)
         })
     } 

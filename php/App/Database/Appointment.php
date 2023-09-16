@@ -128,6 +128,58 @@ class Appointment
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getAllStatus()
+    {
+        $sql = "SELECT * FROM appointment_status";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateAppointment($appointmentId, $patientName, $patientTel, $doctor, $service, $date, $startTime, $endTime, $message, $status)
+    {
+        $sql = "UPDATE appointments 
+                SET patient_name = :patientName, 
+                    patient_tel = :patientTel, 
+                    doctor_id = :doctor, 
+                    doctor_service_id = :service, 
+                    date = :date, 
+                    start_time = :startTime,
+                    end_time = :endTime,
+                    message = :message,
+                    appointment_status_id = :status
+                WHERE id = :appointmentId";
+
+        $data = [
+            'patientName' => $patientName,
+            'patientTel' => $patientTel,
+            'doctor' => $doctor,
+            'service' => $service,
+            'date' => $date,
+            'startTime' => $startTime,
+            'endTime' => $endTime,
+            'message' => $message,
+            'status' => $status,
+            'appointmentId' => $appointmentId
+        ];
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($data);
+    }
+
+    public function deleteAppointment($id)
+    {
+        $sql = "DELETE FROM appointments WHERE id=:id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
+
+
 }
 
     

@@ -24,14 +24,14 @@
                 </div>
                 <div class="form-group">
                     <label for="doctor">Select Doctor</label>
-                    <select name="doctor" id="doctor" class="form-control">
+                    <select name="doctor" id="doctor" class="form-control doctorSelect">
                         <option value="0">Please select doctor</option>
                     </select>
                     <div class="error doctorError"></div>
                 </div>
                 <div class="form-group">
                     <label for="service">Select Service</label>
-                    <select name="service" id="service" class="form-control">
+                    <select name="service" id="service" class="form-control serviceSelect">
                         <option value="0">Please select service</option>
                     </select>
                     <div class="error serviceError"></div>
@@ -82,69 +82,73 @@
             </table>
             <h2 id="appointmentsMessage"></h2>
             <a href="#">Back</a>
-
-            <div class="modal fade" id="appointmentModal" >
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form id="editAppointmentForm">
-                            <!-- Form fields go here -->
-                            <div class="form-group">
-                                <label for="patientName">Patient Name</label>
-                                <input type="text" id="patientName" name="patientName" class="form-control">
-                                <div class="error patientNameError"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="patientTel">Patient Telephone</label>
-                                <input type="text" id="patientTel" name="patientTel" class="form-control">
-                                <div class="error patientTelError"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="doctor">Select Doctor</label>
-                                <select name="doctor" id="doctor" class="form-control">
-                                    <option value="0">Please select doctor</option>
-                                </select>
-                                <div class="error doctorError"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="service">Select Service</label>
-                                <select name="service" id="service" class="form-control">
-                                    <option value="0">Please select service</option>
-                                </select>
-                                <div class="error serviceError"></div>
-                            </div>
-                            <div class="form-group dateTime">
-                                <div>
-                                    <label for="date">Select date</label>
-                                    <input type="date" id="date" name="date" class="form-control">
-                                    <div class="error dateError"></div>
-                                </div>
-                                <div>
-                                    <label for="startTime">Select start time</label>
-                                    <input type="time" id="startTime" name="startTime" class="form-control">
-                                    <div class="error startTimeError"></div>
-                                </div>
-                                <div>
-                                    <label for="startEnd">Select end time</label>
-                                    <input type="time" id="endTime" name="endTime" class="form-control">
-                                    <div class="error endTimeError"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message or special request</label>
-                                <textarea name="message" id="message" cols="30" rows="1" class="form-control"></textarea>
-                            </div>
-                            <button type="submit">Set appointment</button>
-                            <!-- Add other form fields here as shown in your provided form -->
-                            <button type="submit" class="btn btn-primary">Set appointment</button>
-                        </form>
+        </div>
+        <div class="modal fade" id="appointmentModal" >
+            <div class="modalContent">
+                <span class="close">&times;</span>
+                <form id="editAppointmentForm">
+                    <!-- Form fields go here -->
+                    <input type="text" name="appointmentId" hidden>
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" id="patientName" name="patientName" class="form-control">
+                        <div class="error patientNameError"></div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="patientTel">Patient Telephone</label>
+                        <input type="text" id="patientTel" name="patientTel" class="form-control">
+                        <div class="error patientTelError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor">Select Doctor</label>
+                        <select name="doctor" id="doctor" class="form-control doctorSelect">
+                            <option value="0">Please select doctor</option>
+                        </select>
+                        <div class="error doctorError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Select Service</label>
+                        <select name="service" id="service" class="form-control serviceSelect">
+                            <option value="0">Please select service</option>
+                        </select>
+                        <div class="error serviceError"></div>
+                    </div>
+                    <div class="form-group dateTime">
+                        <div>
+                            <label for="date">Select date</label>
+                            <input type="date" id="date" name="date" class="form-control">
+                            <div class="error dateError"></div>
+                        </div>
+                        <div>
+                            <label for="startTime">Select start time</label>
+                            <input type="time" id="startTime" name="startTime" class="form-control">
+                            <div class="error startTimeError"></div>
+                        </div>
+                        <div>
+                            <label for="endTime">Select end time</label>
+                            <input type="time" id="endTime" name="endTime" class="form-control">
+                            <div class="error endTimeError"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message or special request</label>
+                        <textarea name="message" id="message" cols="30" rows="1" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentStatus">Select Status</label>
+                        <select name="appointmentStatus" id="appointmentStatus" class="form-control statusSelect">
+                            <option value="0">Please select status</option>
+                        </select>
+                        <div class="error appointmentStatusError"></div>
+                    </div>
+                    <button type="submit">Update appointment</button>
+                </form>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-    <script src="./js/form.js"></script>
     <script src="./js/appointmentsTable.js"></script>
+    <script src="./js/form.js"></script>
     <script src="./js/hashchange.js"></script>
 </body>
 </html>
