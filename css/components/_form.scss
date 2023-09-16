@@ -1,0 +1,75 @@
+@use '../abstracts/mixins' as mix;
+@use "../abstracts/variables" as var;
+@use 'sass:math';
+
+.form-container{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    transform: translateY(-40%);
+    width: 30%;
+    display: none;
+    h2{
+        color: var.$text-color-secondary;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+    form{
+        width: 100%;
+        .form-group{
+            margin-bottom: 20px;
+            &.dateTime{
+                display: flex;
+                justify-content: space-between;
+            }
+            label{
+                display: block;
+                font-size: 14px;
+            }
+            .form-control{
+                outline: 0;
+                border: 0;
+                border-bottom: 1px solid var.$text-color-base;
+                background-color: transparent;
+                padding: 5px;
+                width: 100%;
+            }
+            #date, #startTime, #endTime{
+                width: 100%;
+            }
+            .error{
+                height: 10px;
+                color: rgb(134, 0, 0);
+                font-weight: bold;
+                font-size: 12px;
+            }
+        }
+        button{
+            padding: 12px 15px;
+            border: 0;
+            background-color: var.$text-color-secondary;
+            color: var.$text-color-primary;
+            cursor: pointer;
+            transition: .3s;
+
+            &:hover{
+                background-color: var.$hover-color;
+            }
+        }
+    }
+
+    a{
+        color: var.$text-color-primary;
+        background-color: #007bff;
+        padding: 10px 12px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        text-decoration: none;
+        transition: .3s;
+        &:hover{
+            background-color: #0056b3;
+        }
+    }
+}
