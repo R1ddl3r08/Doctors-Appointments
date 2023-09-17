@@ -18,7 +18,7 @@ class Appointment
         $timestamp = strtotime($date);
         $dayOfWeek = date('w', $timestamp);
     
-        return ($dayOfWeek >= 6 && $dayOfWeek <= 7);
+        return ($dayOfWeek == 6 || $dayOfWeek == 0);
     }
 
     public function validateAppointment($patientName, $patientTel, $doctor, $service, $date, $startTime, $endTime, $message)
@@ -73,6 +73,8 @@ class Appointment
             $errors['endTime'] = "Doctor doesn't work at that time";
         } elseif ($endTime < $startTime){
             $errors['endTime'] = "End time can't be before start time";
+        } elseif (!($this->isAvailable($date, $startTime, $endTime, $doctor))) {
+            $errors['endTime'] = "This appointment is not available";
         }
 
         return $errors;
@@ -177,6 +179,35 @@ class Appointment
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         
         return $stmt->execute();
+    }
+
+    public function isAvailable($date, $startTime, $endTime, $doctor)
+    {
+        if (empty($date) || empty($startTime) || empty($endTime)) {
+            return false;
+        }
+
+        if ($startTime === false || $endTime === false) {
+            return false;
+        }
+
+        $sql = "SELECT * FROM appointments WHERE date = :date AND doctor_id = :doctor";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':date', $date, \PDO::PARAM_STR);
+        $stmt->bindParam(':doctor', $doctor, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $existingAppointments = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($existingAppointments as $appointment) {
+            $existingStartTime = strtotime($appointment['start_time']);
+            $existingEndTime = strtotime($appointment['end_time']);
+
+            if ($startTime < $existingEndTime && $endTime > $existingStartTime) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
